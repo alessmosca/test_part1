@@ -1,0 +1,7 @@
+/home/almosca/test/test_partI/build/CMakeFiles/install.dir
+/home/almosca/test/test_partI/build/CMakeFiles/list_install_components.dir
+/home/almosca/test/test_partI/build/CMakeFiles/rebuild_cache.dir
+/home/almosca/test/test_partI/build/CMakeFiles/test_part1.dir
+/home/almosca/test/test_partI/build/CMakeFiles/install/strip.dir
+/home/almosca/test/test_partI/build/CMakeFiles/install/local.dir
+/home/almosca/test/test_partI/build/CMakeFiles/edit_cache.dir
