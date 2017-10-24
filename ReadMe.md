@@ -11,14 +11,14 @@ Develop a command line interface that allows execution of all operations of the 
 The user as to provide the input over the command line.
 The possible choice are shown: 
 
-'''
+```
   std::cout <<"Welcome to the test1 -- Alessandro Mosca" << std::endl;
   std::cout <<"Please chose your input. Possible choices: \n"
               " - test1.png\n"
 	      " - test2.png\n"
 	      " - test3.png\n"
 	      " - test4.jpg" << std::endl;
-'''
+```
 
 
 ## References
