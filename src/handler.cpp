@@ -3,12 +3,13 @@
 handler::handler(std::__cxx11::string input)
 {
   _image_path = input;
+   _image = cv::imread(_image_path,CV_LOAD_IMAGE_COLOR);
+  _image_alg = _image.clone();
   black.zeros();
-  this->display_image();
-  _image_alg = _image;
   row = _image.rows;
   col = _image.cols;
-  cv::waitKey(0);
+  _black_image.zeros(row, col);
+  
 }
 
 handler::~handler()
@@ -21,11 +22,10 @@ handler::~handler()
  */
 
 void handler::display_image()
-{
-  _image = cv::imread(_image_path,CV_LOAD_IMAGE_COLOR);
-  
+{ 
+  cv::namedWindow("Input Image", CV_WINDOW_AUTOSIZE);
   cv::imshow("Input Image", _image);
-
+  cv::waitKey(0);
 }
 
 /**
@@ -35,7 +35,7 @@ void handler::display_image()
 void handler::display_results(cv::Mat3b image)
 {
   cv::imshow("Result Image", image);
-
+  cv::waitKey(0);
 }
 
 /**
@@ -43,9 +43,7 @@ void handler::display_results(cv::Mat3b image)
  */
 void handler::find_boarder()
 {
-
 }
-
 
 /**
  * Function for running the algorithm for finding the region 
@@ -56,17 +54,16 @@ cv::Mat3b handler::find_region(int x, int y)
   flood_fill(_image_alg, temp, x, y, row, col);
   for(int i=0; i< row; i++){
     for(int j=0; j<col; j++){
-      cv::Vec3b _bgr_image = _image.at<cv::Vec3b>(i,j);
+      cv::Vec3b _bgr_image = _image_alg.at<cv::Vec3b>(i,j);
       cv::Vec3b _bgr_temp = temp.at<cv::Vec3b>(i,j);
       if(norm_calculation(_bgr_temp, black) != 0){
-	_image.at<cv::Vec3b>(i,j) = black;
+	_image_alg.at<cv::Vec3b>(i,j) = black;
       }
     }
   }
   
-  display_results(_image);
-  cv::waitKey(0);
-  return _image;
+  display_results(_image_alg);
+  return _image_alg;
 }
 
 /**
@@ -114,4 +111,10 @@ void handler::flood_fill(cv::Mat3b original, cv::Mat3b copy, int x, int y, int r
     }
   }
 
+}
+
+
+void handler::save_image()
+{
+  cv::imwrite( "image_test.png", _image_alg);
 }
