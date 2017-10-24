@@ -17,6 +17,8 @@ opencv2/core.hpp
 -
 opencv2/highgui.hpp
 -
+opencv2/imgproc/imgproc.hpp
+../include/opencv2/imgproc/imgproc.hpp
 
 /home/almosca/test/test_partI/main.cpp
 handler.hpp
@@ -907,6 +909,10 @@ opencv2/highgui.hpp
 /usr/local/include/opencv2/opencv2/highgui.hpp
 opencv2/imgproc/imgproc_c.h
 /usr/local/include/opencv2/opencv2/imgproc/imgproc_c.h
+
+/usr/local/include/opencv2/imgproc/imgproc.hpp
+opencv2/imgproc.hpp
+/usr/local/include/opencv2/imgproc/opencv2/imgproc.hpp
 
 /usr/local/include/opencv2/imgproc/imgproc_c.h
 opencv2/imgproc/types_c.h

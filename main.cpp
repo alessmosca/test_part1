@@ -1,6 +1,9 @@
 #include <handler.hpp>
 
+
+
 int main(int argc, char ** argv){
+  
   std::string name;
   std::cout <<"Welcome to the test1 -- Alessandro Mosca" << std::endl;
   std::cout <<"Please chose your input. Possible choices: \n"
@@ -32,16 +35,18 @@ int main(int argc, char ** argv){
 	std::cout <<"Choose the values of the pixel" << std::endl;
 	std::cout <<"max X: " <<  hand->row <<  " max Y: " <<  hand->col << "\n"
 		<< std::endl;
-	
-	std::cin >> pixel_x;
-	std::cin >> pixel_y;
+	std::cout <<"set X: "; std::cin >> pixel_x;
+	std::cout <<"set Y: "; std::cin >> pixel_y;
+	std::cout <<"set threshold (default 0.0):  "; std::cin >> hand->threshold;
 	hand->find_region(pixel_x,pixel_y);
 	break;
       case (3):
+	hand->x_input = pixel_x;
+	hand->y_input = pixel_y;
 	hand->find_boarder();
 	break;
       case (4):
-	return - 3;
+	hand->save_image();
       case (5): 
 	return -1;
     }

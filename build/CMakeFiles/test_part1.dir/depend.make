@@ -85,6 +85,7 @@ CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/highgui/highgui
 CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/imgcodecs.hpp
 CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/imgcodecs/imgcodecs_c.h
 CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/imgproc.hpp
+CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/imgproc/imgproc.hpp
 CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h
 CMakeFiles/test_part1.dir/main.cpp.o: /usr/local/include/opencv2/ml.hpp
@@ -223,6 +224,7 @@ CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/highgui/
 CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/imgcodecs.hpp
 CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/imgcodecs/imgcodecs_c.h
 CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/imgproc.hpp
+CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/imgproc/imgproc.hpp
 CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/imgproc/imgproc_c.h
 CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/imgproc/types_c.h
 CMakeFiles/test_part1.dir/src/handler.cpp.o: /usr/local/include/opencv2/ml.hpp

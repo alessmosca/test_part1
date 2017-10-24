@@ -17,13 +17,13 @@ make
 ```
 
 ## Usage
-The user as to provide the input over the command line.
-The possible choice are shown: 
-
 Run the application:
 ```
+cd build 
 ./test_part1
 ```
+The user as to provide the input over the command line.
+The possible choice are shown: 
 Command line interface: 
 
 ```
@@ -46,4 +46,11 @@ std::cout <<"Welcome to the test1 -- Alessandro Mosca" << std::endl;
 ```
 
 
+
+
 ## References
+
+Flood fills
+https://www.codeproject.com/Articles/6017/QuickFill-An-efficient-flood-fill-algorithm
+
+
