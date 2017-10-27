@@ -44,8 +44,15 @@ std::cout <<"Welcome to the test1 -- Alessandro Mosca" << std::endl;
 		" [4] Save Image\n" 
 		" [5] Exit "<< std::endl;
 ```
+## Gaussian Blur 
+Honestly my backgroud about image processing is not really wide. I tried anyway to achieve some results, without completing the project. 
+The choice of the Gaussian Blur, is due to my tiny knowledge from the university. I tried to blur the image in order to achieve a better edge detection, but seems not working 
 
 
+## Implementation
+Implement a proper perimeter smoothing operator. 
+Since my knoledge is not really high, i tried to study a bit the possible implementation, and as far as I understood, one of the best solution was to apply the Bezier curves algotithm 
+(i tried without good results)
 
 
 ## References

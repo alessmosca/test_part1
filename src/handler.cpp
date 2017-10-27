@@ -53,12 +53,12 @@ void handler::find_border()
   
   std::vector<int> temp_pixel;
   temp_pixel.resize(2);
-  cv::Mat3b temp2 = filtered.clone();
-  find_perimeter(filtered, temp2, x_input, y_input, row, col);
+  cv::Mat3b temp2 = _image_alg.clone();
+  find_perimeter(_image_alg, temp2, x_input, y_input, row, col);
   
   for(int i=0; i< row; i++){
     for(int j=0; j< col; j++){
-      cv::Vec3b _bgr_image = filtered.at<cv::Vec3b>(i,j);
+      cv::Vec3b _bgr_image = _image_alg.at<cv::Vec3b>(i,j);
       cv::Vec3b _bgr_temp = temp2.at<cv::Vec3b>(i,j);
       if(norm_calculation(_bgr_image, white) == 0){
 	temp2.at<cv::Vec3b>(i,j) = white;
@@ -204,27 +204,37 @@ std::vector <std::vector< double> > handler::getGaussian(int row, int col, doubl
   for(int i=0; i<row; i++){
     kernel[i].resize(col);
   }
-  double sum = 0.0;
-  
-  for (int i=0 ; i<row ; i++) {
-    for (int j=0 ; j<col ; j++) {
-	kernel[i][j] = exp(-(i*i+j*j)/(2*sigma*sigma))/(2*M_PI*sigma*sigma);
-	sum += kernel[i][j];
-    }
-  }
+  double total=0;
+  int kernalWidth = row;
+  int kernalHeight = col;
+ //calculate each relavant value to neighour pixels and store it in 2d array
+ for(int row=0;row<kernalWidth;row++){
 
-  for (int i=0 ; i<row ; i++) {
-    for (int j=0 ; j<col ; j++) {
-	kernel[i][j] /= sum;
-    }
+  for(int col=0;col<kernalHeight;col++){
+
+   float value=(1/(2*M_PI*pow(sigma,2)))*exp(-(pow(row-kernalWidth/2,2)+pow(col-kernalHeight/2,2))/(2*pow(sigma,2)));
+
+   kernel[row][col]=value;
+
+   total+=value;
   }
+ }
+
+ //Scale value in 2d array in to 1
+ for(int row=0;row<kernalWidth;row++){
+  for(int col=0;col<kernalHeight;col++){
+
+   kernel[row][col]=kernel[row][col]/total;
+
+  }
+ }
 return kernel;
 }
 
 
 cv::Mat3b handler::computeFiltering(){
- const int kernalWidth=3;
- const int kernalHeight=3;
+ const int kernalWidth=200;
+ const int kernalHeight=200;
  std::vector<std::vector<double> > kernel = getGaussian(kernalWidth,kernalHeight,5);
  
  int verticleImageBound=(kernalHeight-1)/2;
@@ -245,9 +255,7 @@ cv::Mat3b handler::computeFiltering(){
    }
    filtered.at<uchar>(rows,cols)=cvRound(value);
   }
-
  }
- 
   return filtered;
 }
 
