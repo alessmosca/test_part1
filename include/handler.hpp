@@ -4,6 +4,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include "opencv2/imgproc/imgproc.hpp"
+#include <unistd.h>
 
 
 class handler {
@@ -24,7 +25,7 @@ public:
   void display_image();
   void display_results(cv::Mat3b, std::string);
   void find_region(int, int);
-  void find_boarder();
+  void find_border();
   void save_image();
   
 private: 
@@ -34,5 +35,5 @@ private:
   cv::Vec3b white;          // supported vector
   int norm_calculation(cv::Vec3b, cv::Vec3b);
   void flood_fill(cv::Mat3b, cv::Mat3b, int, int, int, int);
-  void find_perimeter(cv::Mat3b , cv::Mat3b, int, int, int, int,cv::Mat3b*);
+  void find_perimeter(cv::Mat3b , cv::Mat3b, int, int, int, int);
 };

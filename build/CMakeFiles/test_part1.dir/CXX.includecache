@@ -19,6 +19,8 @@ opencv2/highgui.hpp
 -
 opencv2/imgproc/imgproc.hpp
 ../include/opencv2/imgproc/imgproc.hpp
+unistd.h
+-
 
 /home/almosca/test/test_partI/main.cpp
 handler.hpp

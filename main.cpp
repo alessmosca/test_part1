@@ -43,7 +43,7 @@ int main(int argc, char ** argv){
       case (3):
 	hand->x_input = pixel_x;
 	hand->y_input = pixel_y;
-	hand->find_boarder();
+	hand->find_border();
 	break;
       case (4):
 	hand->save_image();

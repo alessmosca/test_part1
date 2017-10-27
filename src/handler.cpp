@@ -3,7 +3,7 @@
 handler::handler(std::__cxx11::string input)
 {
   _image_path = input;
-   _image = cv::imread(_image_path,CV_LOAD_IMAGE_COLOR);
+  _image = cv::imread(_image_path,CV_LOAD_IMAGE_COLOR);
   _image_alg = _image.clone();
   black.zeros();
   white[0] = 255;
@@ -47,22 +47,21 @@ void handler::display_results(cv::Mat3b image, std::string name)
 /**
  * Function for running the algorithm for finding the boarder from the output of the find_region function  
  */
-void handler::find_boarder()
+void handler::find_border()
 {
-  cv::Mat3b temp = _image_alg.clone();
-  cv::Mat3b sad = temp.clone();;
-  find_perimeter(_image_alg, temp,x_input,y_input,row, col, &sad);
+  cv::Mat3b temp2 = _image_alg.clone();
+  find_perimeter(_image_alg, temp2, x_input, y_input, row, col);
   //accroding to the output of the flood fill algorithm the Contour will be shown. 
   //the other pixels are set with black color
 //   for(int i=0; i< row; i++){
 //     for(int j=0; j<col; j++){
-//       cv::Vec3b _bgr_image = _image_alg.at<cv::Vec3b>(i,j);
-//       if(norm_calculation(_bgr_image, white) != 0){
-// 	_image_alg.at<cv::Vec3b>(i,j) = black;
+//       cv::Vec3b _bgr_image = temp.at<cv::Vec3b>(i,j);
+//       if(norm_calculation(_bgr_image, black) != 0){
+// 	find_perimeter(_image_alg, temp,x_input,y_input,row, col);
 //       }
 //     }
 //   }
-  display_results(sad, "Result Contour Image");
+  display_results(_image_alg, "Result Contour Image_after");
   
 }
 
@@ -132,47 +131,49 @@ void handler::flood_fill(cv::Mat3b original, cv::Mat3b copy, int x, int y, int r
   }
 }
 
-void handler::find_perimeter(cv::Mat3b original, cv::Mat3b copy, int x, int y , int row_max, int col_max, cv::Mat3b* temp)
+void handler::find_perimeter(cv::Mat3b original, cv::Mat3b copy, int x, int y , int row_max, int col_max)
 {
+  //sleep(1);
   cv::Vec3b _bgr_original = original.at<cv::Vec3b>(x,y);
   cv::Vec3b _bgr_copy = copy.at<cv::Vec3b>(x,y);
   
+  std::cout << x << " " << y << std::endl; 
   
-  if(this->norm_calculation(white,_bgr_copy) == 0){
-    return ;
+  if(this->norm_calculation(black,_bgr_copy) == 0){
+    return;
   }
   copy.at<cv::Vec3b>(x,y) = black;
   
-  if(x+1 < row_max){
+  if(x+1 < row_max && this->norm_calculation(white,original.at<cv::Vec3b>(x+1,y)) != 0){
     if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x+1,y)) == 0){
-      flood_fill(original, copy, x+1, y, row_max, col_max);
+      find_perimeter(original, copy, x+1, y, row_max, col_max);
     }else{
-      temp->at<cv::Vec3b>(x,y) = white;
-      flood_fill(original, copy, x+1, y, row_max, col_max);
+      original.at<cv::Vec3b>(x,y) = white;
+      return;
     }
   }
-  if(x-1 >= 0){
-    if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x-1,y)) == 0){
-      flood_fill(original, copy, x-1, y, row_max, col_max);
+  if(x-1 >= 0 && this->norm_calculation(white,original.at<cv::Vec3b>(x-1,y)) != 0){
+    if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x-1,y)) == 0 ){
+      find_perimeter(original, copy, x-1, y, row_max, col_max);
     }else{
-      temp->at<cv::Vec3b>(x,y)= white;
-      flood_fill(original, copy, x-1, y, row_max, col_max);
+      original.at<cv::Vec3b>(x,y) = white;
+      return;
     }
   }
-  if(y+1 < col_max){
-    if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x,y+1)) == 0){
-      flood_fill(original, copy, x, y+1, row_max, col_max);
+  if(y+1 < col_max && this->norm_calculation(white,original.at<cv::Vec3b>(x,y+1)) != 0){
+    if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x,y+1)) == 0 ){
+      find_perimeter(original, copy, x, y+1, row_max, col_max);
     }else{
-      temp->at<cv::Vec3b>(x,y) = white;
-      flood_fill(original, copy, x, y+1, row_max, col_max);
+      original.at<cv::Vec3b>(x,y) = white;
+      return;
     }
   }
-  if(y-1 >= 0){
-    if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x,y-1)) == 0){
-      flood_fill(original, copy, x, y-1, row_max, col_max);
+  if(y-1 >= 0 && this->norm_calculation(white,original.at<cv::Vec3b>(x,y-1)) != 0){
+    if(this->norm_calculation(_bgr_original, original.at<cv::Vec3b>(x,y-1)) == 0 ){
+      find_perimeter(original, copy, x, y-1, row_max, col_max);
     }else{
-      temp->at<cv::Vec3b>(x,y) = white;
-      flood_fill(original, copy, x, y-1, row_max, col_max);
+      original.at<cv::Vec3b>(x,y) = white;
+      return;
     }
   }
 }
