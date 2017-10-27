@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <iostream>
+#include <vector> 
 #include <math.h>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
@@ -30,9 +31,14 @@ public:
   
 private: 
   
+  std::vector<std::vector<int> > perimeter_pixel;
+  std::vector<double> perimeter_x, perimeter_y;
+  cv::Mat3b filtered;
   cv::Mat3b _black_image;   // supported matrix
   cv::Vec3b black;          // supported vector
   cv::Vec3b white;          // supported vector
+  
+  std::vector <std::vector< double> > getGaussian(int row, int col, double sigma);
   int norm_calculation(cv::Vec3b, cv::Vec3b);
   void flood_fill(cv::Mat3b, cv::Mat3b, int, int, int, int);
   void find_perimeter(cv::Mat3b , cv::Mat3b, int, int, int, int);

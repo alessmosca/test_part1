@@ -1,6 +1,12 @@
 #include <handler.hpp>
 
+int pixel_x, pixel_y;
 
+// static void onMouse(int event, int x, int y, int f, void*){
+//   pixel_x = x;
+//   pixel_x = y;
+//   std::cout << x << " " << y << std::endl;
+// }
 
 int main(int argc, char ** argv){
   
@@ -15,7 +21,7 @@ int main(int argc, char ** argv){
   handler* hand = new handler("../Images/"+name);
   
   int choice = 0;
-  int pixel_x, pixel_y;
+  
   while(true){
     std::cout <<"Welcome to the test1 -- Alessandro Mosca" << std::endl;
     std::cout <<"Please chose your input. Possible choices: \n"
@@ -35,9 +41,11 @@ int main(int argc, char ** argv){
 	std::cout <<"Choose the values of the pixel" << std::endl;
 	std::cout <<"max X: " <<  hand->row <<  " max Y: " <<  hand->col << "\n"
 		<< std::endl;
-	std::cout <<"set X: "; std::cin >> pixel_x;
-	std::cout <<"set Y: "; std::cin >> pixel_y;
+	//cv::setMouseCallback("Input Image", onMouse, 0);
+ 	std::cout <<"set X: "; std::cin >> pixel_x;
+ 	std::cout <<"set Y: "; std::cin >> pixel_y;
 	std::cout <<"set threshold (default 0.0):  "; std::cin >> hand->threshold;
+	
 	hand->find_region(pixel_x,pixel_y);
 	break;
       case (3):
