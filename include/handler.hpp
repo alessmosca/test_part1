@@ -28,6 +28,7 @@ public:
   void find_region(int, int);
   void find_border();
   void save_image();
+  cv::Mat3b computeFiltering();
   
 private: 
   

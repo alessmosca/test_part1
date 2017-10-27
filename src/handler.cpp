@@ -101,12 +101,7 @@ void handler::find_region(int x, int y)
   
   display_results(_image_alg, "Result Region Image");
   filtered = _image_alg.clone();
-  for ( int i = 1; i < 10; i = i + 2 )
-    { cv::blur( _image_alg, filtered, cv::Size( i, i ));
-      
-    }
-    
-      
+  filtered = computeFiltering();
   display_results(filtered, "Result Filtered Image");
   
   
@@ -227,11 +222,33 @@ return kernel;
 }
 
 
-void hendler::computeFiltering(){
-  
-  
-  
-  
+cv::Mat3b handler::computeFiltering(){
+ const int kernalWidth=3;
+ const int kernalHeight=3;
+ std::vector<std::vector<double> > kernel = getGaussian(kernalWidth,kernalHeight,5);
+ 
+ int verticleImageBound=(kernalHeight-1)/2;
+ int horizontalImageBound=(kernalWidth-1)/2;
+ 
+ for(int rows=0+verticleImageBound;rows<row-verticleImageBound;rows++){
+
+  for(int cols=0+horizontalImageBound;cols<col-horizontalImageBound;cols++){
+
+   float value=0.0;
+
+   for(int kRow=0;kRow<kernalHeight;kRow++){
+    for(int kCol=0;kCol<kernalWidth;kCol++){
+     
+     float pixel=_image_alg.at<uchar>(kRow+rows-verticleImageBound,kCol+cols-horizontalImageBound)*kernel[kRow][kCol];
+     value+=pixel;
+    }
+   }
+   filtered.at<uchar>(rows,cols)=cvRound(value);
+  }
+
+ }
+ 
+  return filtered;
 }
 
 
